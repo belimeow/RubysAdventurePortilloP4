@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class CollectibleHealth : MonoBehaviour
 {
-void OnTriggerEnter2D(Collider2D other)
+
+    void OnTriggerEnter2D(Collider2D other)
     {
-        RubyController controller = other.GetComponrnt<RubyComtroller>();
+        RubyController controller = other.GetComponent<RubyController>();
 
         if (controller != null)
         {
-            controller.ChangeHealth(1);
-            Destroy(gameObject);
+            if (controller.health < controller.maxHealth)
+            {
+                controller.ChangeHealth(1);
+                Destroy(gameObject);
+            }
         }
     }
-
-    // Update is called once per frame
-    void ()
-    {
-        
-    }
-}
+}   
