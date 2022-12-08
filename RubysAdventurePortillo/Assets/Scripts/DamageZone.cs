@@ -7,7 +7,7 @@ public class DamageZone : MonoBehaviour
     // Start is called before the first frame update
     void OnTriggerEnnter2D(Collider2D other)
     {
-        RubyController = other.GetComponent<RudyController>();
+        RubyController = other.GetComponent<RubyController>();
        
 
         if (Controller != null)

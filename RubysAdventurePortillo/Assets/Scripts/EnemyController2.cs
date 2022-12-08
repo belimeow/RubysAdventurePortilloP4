@@ -5,29 +5,33 @@ using UnityEngine;
 public class EnemyController2 : MonoBehaviour
 {
     public float speed = 3.0f;
-    public bool verticle;
-    public float chageTime = 3.0f;
+    public bool vertical;
+    public float changeTime = 3.0f;
 
 
     Rigidbody2D rigidbody2D;
     float timer;
     int direction = 1;
-    int direction = 1;
+
+    Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody2D = GetComponent<rigidbody2D>(); 
+        rigidbody2D = GetComponent<Rigidbody2D>();
+        timer = changeTime;
+        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
-        timer -= timer.deltaTime;
+        timer -= Time.deltaTime;
 
         if(timer < 0)
         {
             direction = -direction;
-            timer = changeTime
+            timer = changeTime;
+            timer = changeTime;
         }
     }
     // Update is called once per frame
@@ -37,12 +41,21 @@ public class EnemyController2 : MonoBehaviour
 
         if (vertical)
         {
-            position.y position.y + Time.deltaTime * speed;
+            position.y = position.y + Time.deltaTime * speed * direction;;
         }
         else
         {
-            posion.x = posion x + Time.deltaTime * speed;
+            position.x = position.x + Time.deltaTime * speed * direction;;
         }
         rigidbody2D.MovePosition(position);
+    }
+    void OnColisionEnter2D(Collision2D other)
+    {
+        RubyController player = other.gameObject.GetComponent<RubyController>();
+
+        if(player != null)
+        {
+            player.ChangeHealth(-1);
+        }
     }
 }
